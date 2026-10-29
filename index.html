@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>시간 - Echo of Self</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Courier New', monospace;
+    }
+    #layout {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      min-height: 100vh;
+      padding: 12px;
+    }
+    #game-container {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      position: relative;
+    }
+    canvas {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      display: block;
+      max-width: calc(100vw - 24px);
+      height: auto !important;
+    }
+    /* 우상단 사운드 음소거 토글 버튼 */
+    #sound-toggle {
+      position: fixed;
+      top: 12px;
+      right: 14px;
+      z-index: 100;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #cfc8ff;
+      background: rgba(14, 12, 26, 0.9);
+      border: 1px solid #8a86b8;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #sound-toggle:hover {
+      background: rgba(42, 34, 72, 0.95);
+      color: #ffe9a8;
+      border-color: #ffe9a8;
+    }
+    /* 게임 캔버스 좌우 상태 패널 */
+    .side-panel {
+      flex: 0 0 164px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #cfc8ff;
+      background: rgba(14, 12, 26, 0.92);
+      border: 2px solid #8a86b8;
+      border-radius: 4px;
+      padding: 10px 12px;
+      line-height: 1.75;
+    }
+    .side-panel h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: #ffe9a8;
+      border-bottom: 1px solid #8a86b8;
+      padding-bottom: 4px;
+    }
+    .side-panel h3:nth-of-type(2) { margin-top: 14px; }
+    .side-panel.hidden { display: none; }
+    .side-panel .dim { color: #8a86b8; font-size: 11px; }
+    .skill-item { margin-bottom: 6px; line-height: 1.35; }
+    /* 작은 화면(창 폭 980px 이하)에서는 사이드 패널이 잘리지 않도록 캔버스 아래에 나란히 배치한다 */
+    @media (max-width: 980px) {
+      body { overflow-y: auto; }
+      #layout {
+        flex-wrap: wrap;
+        align-content: center;
+      }
+      #game-container {
+        order: 1;
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .side-panel {
+        order: 2;
+        flex: 1 1 260px;
+        max-width: 312px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="sound-toggle" type="button">사운드: 켜짐 (M)</button>
+  <div id="layout">
+    <div class="side-panel hidden">
+      <h3>능력치</h3>
+      <div id="stat-chapter" class="dim">1장 진행 중</div>
+      <div id="stat-hp">HP -</div>
+      <div id="stat-mp">MP -</div>
+      <div id="stat-atk">공격력 -</div>
+      <div id="stat-frag">힘의 조각 -</div>
+      <h3>조작</h3>
+      <div class="dim">이동/선택 · 방향키 / WASD<br>조사/확인 · E / Space / Enter<br>스킬창 닫기 · Q / 우클릭<br>방어 · 피해 감소, HP·MP 회복<br>사운드 토글 · M<br>상성 · 힘▶시간▶마음▶힘</div>
+    </div>
+    <div id="game-container"></div>
+    <div class="side-panel hidden">
+      <h3>습득 스킬</h3>
+      <div id="skill-list">없음</div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

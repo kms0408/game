@@ -1,0 +1,21 @@
+{
+  "name": "echo-of-self",
+  "version": "0.1.0",
+  "description": "To The Moon 스타일 탑다운 2D 픽셀 스토리 RPG - 자기 자신과의 싸움",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "node --experimental-vm-modules --test tests/*.test.cjs",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["phaser", "game", "story", "rpg", "pixel"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "phaser": "^3.70.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
